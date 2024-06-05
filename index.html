@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "c7d4cf53e37f4309800f1471a87f11e0"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +94,17 @@
     </section>
   </main>
 
+  
+
   <script>
+    class InvalidInputError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "InvalidInputError";
+        TrackJS.track('Testing TrackJS!');
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -95,7 +112,16 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
+      try {
+      if (isNaN(firstNum) || isNaN(secondNum)) {
+        throw new InvalidInputError('Input values must be numbers');
+      }
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+    } catch (error) {
+      output.innerHTML = 'Error: ' + error.message;
+    } finally {
+      console.error('Invalid values entered');
+    }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -153,7 +179,21 @@
 
     // Console Table Button
     errorBtns[10].addEventListener('click', e => {
-      console.table([{ a: 1, b: 'Y' }, { a: 'Z', b: 2 }]);
+      let classes = [
+        {
+          department: 'COGS',
+          number: '108',
+        },
+        {
+          department: 'CSE',
+          number: '110',
+        },
+        {
+          department: 'MATH',
+          number: '171',
+        },
+      ]
+      console.table(classes);
     });
 
     // Start Timer Button
@@ -168,9 +208,22 @@
 
     // Console Trace Button
     errorBtns[13].addEventListener('click', e => {
-      console.trace('Console Trace Demo');
+      const layerOne = () => { layerTwo(); };
+      const layerTwo = () => { layerThree(); };
+      const layerThree = () => { layerFour(); };
+      const layerFour = () => { console.trace(); };
+      layerOne();
     });
       
+    // Trigger a Global Error Button
+    errorBtns[14].addEventListener('click', e => {
+      try {
+        throw new Error('AHHH Global Error');
+      } catch (error) {
+        console.log('Just logging the error, ' + error.name + ': ' + error.message);
+        TrackJS.track('Testing TrackJS!');
+      }
+    });
 
   </script>
 </body>
