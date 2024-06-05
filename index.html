@@ -100,8 +100,78 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
-    // Start your code here
-    // You may move this JS to another file if you wish
+    // Console Log Button 
+    errorBtns[0].addEventListener('click', e => {
+      console.log('Console Log Demo');
+    });
+
+    // Console Error Button
+    errorBtns[1].addEventListener('click', e => {
+      console.error('Console Error Demo');
+    });
+
+    // Console Count Button
+    errorBtns[2].addEventListener('click', e => {
+      console.count('Console Count Demo');
+    });
+
+    // Console Warn Button
+    errorBtns[3].addEventListener('click', e => {
+      console.warn('Console Warn Demo');
+    });
+
+    // Console Assert Button
+    errorBtns[4].addEventListener('click', e => {
+      console.assert(false, 'Console Assert Demo');
+    });
+
+    // Console Clear Button
+    errorBtns[5].addEventListener('click', e => {
+      console.clear();
+    });
+
+    // Console Dir Button
+    errorBtns[6].addEventListener('click', e => {
+      console.dir(document.body);
+    });
+
+    // Console dirxml Button
+    errorBtns[7].addEventListener('click', e => {
+      console.dirxml(document);
+    });
+
+    // Console Group Start
+    errorBtns[8].addEventListener('click', e => {
+      console.group('Console Group Demo');
+      console.log('Inside group');
+    });
+
+    // Console Group End
+    errorBtns[9].addEventListener('click', e => {
+      console.groupEnd();
+    });
+
+    // Console Table Button
+    errorBtns[10].addEventListener('click', e => {
+      console.table([{ a: 1, b: 'Y' }, { a: 'Z', b: 2 }]);
+    });
+
+    // Start Timer Button
+    errorBtns[11].addEventListener('click', e => {
+      console.time('Timer');
+    });
+
+    // End Timer Button
+    errorBtns[12].addEventListener('click', e => {
+      console.timeEnd('Timer');
+    });
+
+    // Console Trace Button
+    errorBtns[13].addEventListener('click', e => {
+      console.trace('Console Trace Demo');
+    });
+      
+
   </script>
 </body>
 
